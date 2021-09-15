@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include partials/head %> 
+    <title>Comamos</title>
+    <script src="/js/googleMap.js"></script>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+
+<body>
+    <%- include partials/header %> 
+    <main class="product-view">
+        <div class="search">
+            <form action="" method="">
+
+                <label for="busqueda1"></label>
+                <input type="text" name="busqueda1" id="busqueda1" placeholder="Restaurante, tipo de comida...">
+
+                <label for="busqueda2"></label>
+                <input type="text" name="busqueda2" class="box-mobile" id="busqueda2" placeholder="Cerca de mi dirección">
+
+                <select name="filtrar" id="filtrar" class="box-mobile">
+                    <option value="filtra">Filtra tu búsqueda</option>
+                </select>
+                <button type="submit" name="buscar" id="boton-buscar">Buscar</button>
+                <i class="fas fa-search" id="boton-lupa"></i>
+            </form>
+        </div>
+        <div class="reserve-form-wide">
+            <div class="box-order1">
+                <img src="<%= productSelect.productRestaurant.avatar %>" alt="imagen plato" class="image-restaurant">
+                <a href="/lista-platos" class="left-separation box-order2">
+                    <h2 class="product-title"><%= productSelect.productRestaurant.nombre %></h2>
+                </a>
+            </div>
+            <div class="map-style">
+                <!--The div element for the map -->
+                <div id="map"></div>
+                <script>
+                    async function initMap () {
+                    const resp = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=<%= productSelect.productRestaurant.direccion %>&key=AIzaSyAFOo6YZ_RiBv1vbXSOxAWR6UmMIMozn6M`)
+                    const data = await resp.json();
+                    const address = { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng };
+                    const map = new google.maps.Map(document.getElementById("map"), {
+                        zoom: 16,
+                        center: address,
+                    });
+                    const marker = new google.maps.Marker({
+                        position: address,
+                        map: map,
+                    });
+                    }
+                </script>
+                <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+                <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFOo6YZ_RiBv1vbXSOxAWR6UmMIMozn6M&callback=initMap&libraries=&v=weekly"
+                async
+                ></script>
+                <h2 class="product-title"><%= productSelect.productRestaurant.direccion %></h2>
+            </div>
+        </div>
+        <article class="reserve-form">
+            <div class="box-order1">
+                <img src="<%= productSelect.imagen %>" alt="imagen plato" class="image-result">
+            </div>
+            <div class="flex-column">   
+                <div class="left-separation box-order2">
+                    <h3 class="product-title"><%= productSelect.plato %></h3>
+                    <p class="product-description"><%= productSelect.descripcion %></p>
+                    <h5 class="product-category">Categoría: <%= productSelect.categoria %></h5>
+                    <h4 class="product-price">Precio: $<%= productSelect.precio %></h4>
+                </div>
+                <div class="buttons-orders">
+                    <form action="/user/account-buisness/products/edit/<%= productSelect.idPlato %>" method="GET" class="logout-button">
+                        <button type="submit" class="none-decoration add-cart">Reservar</button>
+                    </form>
+                </div>    
+            </div>
+        </article>
+    </main>
+    <%- include partials/footer %>     
+</body>
+
+</html>

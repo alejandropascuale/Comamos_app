@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include partials/head %>
+    <link rel="stylesheet" href="/css/account.css">
+    <title>Listado de Platos</title>
+</head>
+
+<body>
+    <%- include partials/header %>
+    <main class="main-order">
+        <form action="/buisness/account/capacity/new">
+            <fieldset class="add-button">
+                <button type="submit" class="none-decoration2">Agregar</button>
+            </fieldset>
+        </form>
+        <section class="capacity-container">
+            <div class="capacity-box" id="green">
+                <p>Capacidad total: </p><%= user.capacidad %> 
+            </div>
+            <div class="capacity-box" id="red">
+                <p>Pendiente de asignar: <br> <%= user.capacidad - capacityNotAsigned %> 
+            </div>
+        </section>
+        <section class="flex-row">
+            <% if (tables.length >= 1) { %>
+                
+            <% tables.forEach(table => { %>
+                <article class="capacity-form">    
+                    <div class="box-table">
+                        <h3><%= table.name %></h3>
+                        <p>Ubicacion: <%= table.ubication %></p>
+                        <p>Capacidad: <%= table.capacity %> personas</p>
+                        <p id="<%= table.status == 'abierta'? 'green': 'red'; %>" >Estado: <%= table.status %></p>
+                    </div>
+                    <div class="buttons-tables">
+                        <form action="/buisness/account/capacity/edit/<%= table.idTable %>" method="GET" class="tables-button">
+                            <button type="submit" class="none-decoration"><i class="far fa-edit"></i></button>
+                        </form>
+                        <form action="/buisness/account/capacity/<%= table.idTable %>/delete?_method=DELETE" method="POST" class="tables-button">
+                            <button type="submit" class="none-decoration"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>    
+                </article>
+            <%  }); %> 
+            <% } else { %>
+                <section class="center">
+                    <h2 class="no-orders">todavia no tenes mesas para ofrecer?</h2>
+                    <h2 class="no-orders">Hace click en agregar</h2>
+                </section>
+            <% } %>
+        </section>
+        <form action="/buisness/account">
+            <fieldset class="logout-button center">
+                <button type="menu" class="none-decoration">Volver</button>
+            </fieldset>
+        </form> 
+    </main>
+    <%- include partials/footer %>     
+</body>
+
+</html>

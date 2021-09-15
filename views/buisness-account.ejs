@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include partials/head %>
+    <link rel="stylesheet" href="/css/account.css">
+    <title>Cuenta</title>
+</head>
+
+<body>
+    <%- include partials/header %> 
+    <main>
+        <section class="box-space">
+            <div class="align-image-user">
+                <img src="<%= user.avatar %>" alt="user image" class="user-image">
+            </div>
+            <div class="align-titles">
+                <h3><%= user.nombre%></h3>
+            </div>
+        </section>
+        <div class="flex-row">    
+            <section class="box-space1">
+                <ul type='none' class="data-form">
+                    <li>
+                        <a href="/buisness/account/edit">
+                            <i class="far fa-user-circle more-space"></i>
+                            <h2>Datos de la cuenta</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <i class="fas fa-gift more-space"></i>
+                            <h2>Gestionar Cupones</h2>
+                        </a>
+                    </li>
+                    <form action="/buisness/account/delete?_method=DELETE" method="POST">
+                        <fieldset class="logout-button">
+                            <button type="submit" class="none-decoration">Eliminar Cuenta</button>
+                            <i class="fas fa-user-times none-decoration"></i>
+                        </fieldset>
+                    </form>
+                </ul>
+            </section>
+            <section class="box-space2">
+                <ul type='none' class="data-form">
+                    <li>
+                        <a href="/buisness/account/orders">
+                            <i class="fas fa-cart-arrow-down more-space"></i>
+                            <h2>Gestionar Reservas</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/buisness/account/products">
+                            <i class="fas fa-utensils more-space"></i>
+                            <h2>Gestionar Platos</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/buisness/account/capacity">
+                            <i class="fas fa-users more-space"></i>
+                            <h2>Gestionar capacidad</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fas fa-comments more-space"></i>
+                            <h2>Ver reseñas</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/buisness/account/orders-history">
+                            <i class="fas fa-history more-space"></i>
+                            <h2>Historial de Reservas</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fas fa-question-circle more-space"></i>
+                            <h2>Comunicate con Comamos</h2>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <form action="/buisness/logout">
+            <fieldset class="logout-button center">
+                <button type="submit" class="none-decoration">Cerrar Sesión</button>
+                <i class="fas fa-sign-out-alt"></i>
+            </fieldset>
+        </form>
+    </main>
+    <%- include partials/footer %>     
+</body>
+
+</html>

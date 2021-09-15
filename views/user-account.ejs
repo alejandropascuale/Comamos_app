@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include partials/head %>
+    <link rel="stylesheet" href="/css/account.css">
+    <title>Cuenta</title>
+</head>
+
+<body>
+    <%- include partials/header %> 
+    <main>
+        <section class="box-space">
+            <div class="align-image-user">
+                <img src="<%= user.avatar %>" alt="user image" class="user-image">
+            </div>
+            <div class="align-titles">
+                <h3><%= user.nombre+' '+ user.apellido%></h3>
+            </div>
+        </section>
+        <div class="flex-row">
+            <section class="box-space1">
+                <ul type='none' class="data-form">
+                    <li>
+                        <a href="/">
+                            <i class="fas fa-home more-space"></i>
+                            <h2>Inicio</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/user/account/edit">
+                            <i class="far fa-user-circle more-space"></i>
+                            <h2>Datos de la cuenta</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <i class="fas fa-gift more-space"></i>
+                            <h2>Cupones</h2>
+                        </a>
+                    </li>
+                    <form action="/user/account/delete?_method=DELETE" method="POST">
+                        <fieldset class="logout-button">
+                            <button type="submit" class="none-decoration">Eliminar Cuenta</button>
+                            <i class="fas fa-user-times"></i>
+                        </fieldset>
+                    </form>
+                </ul>
+            </section>
+            <section class="box-space2">
+                <ul type='none' class="data-form">
+                    <li>
+                        <a href="/user/account/my-order">
+                            <i class="fas fa-cart-arrow-down more-space"></i>
+                            <h2>Ver mi Reserva</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/user/account/orders">
+                            <i class="fas fa-history more-space"></i>
+                            <h2>Historial de Reservas</h2>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fas fa-heart more-space"></i>
+                            <h2>Mis Favoritos</h2>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <form action="/user/logout">
+            <fieldset class="logout-button center">
+                <button type="submit" class="none-decoration">Cerrar Sesión</button>
+                <i class="fas fa-sign-out-alt"></i>
+            </fieldset>
+        </form>
+    </main>
+    <%- include partials/footer %>     
+</body>
+
+</html>
