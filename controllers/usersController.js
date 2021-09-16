@@ -168,7 +168,7 @@ const controller = {
     },
     carrito: (req, res) => {
         
-        return res.render ('user-shop');
+        return res.render ('user-shop', {user: req.session.userLogged});
     }
 }
 

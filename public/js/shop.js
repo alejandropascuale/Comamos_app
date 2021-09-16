@@ -3,14 +3,16 @@ window.addEventListener('load', async () => {
     let carts = document.querySelectorAll('.btn');
 
     let products = await (await fetch ('http://localhost:8000/api/products')).json();
+    let cartProducts = [];
     
     for (let i= 0; i< carts.length; i++) {
         carts[i].addEventListener('click', (e) => {
             let nameProduct = carts[i].parentElement.querySelector('h3').innerText;
             //let productSelect = await (await fetch (('http://localhost:8000/api/'+urlProduct))).json();
             let productSelect = products.filter(p => p.plato == nameProduct);
+            cartProducts.push(productSelect)
             cartNumbers();
-            console.log(productSelect[0]);
+            localStorage.setItem('cartItem', JSON.stringify(cartProducts))
             //console.log(e.target.classList.value);
         })     
     }
